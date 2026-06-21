@@ -12,5 +12,6 @@ namespace FinalProject.BL.DTOs
         public string Instructions { get; set; }
         public int PrepTimeMinutes { get; set; }
         public int UserId { get; set; }
+        public List<IngredientCreationInfo> Ingredients { get; set; } = new List<IngredientCreationInfo>();
     }
 }
