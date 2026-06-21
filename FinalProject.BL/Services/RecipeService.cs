@@ -30,7 +30,7 @@ namespace FinalProject.BL.Services
                 UserId = r.UserId,
                 UserName = r.User != null ? r.User.Name : "Unknown",
                 Ingredients = r.RecipeIngredients != null
-                    ? r.RecipeIngredients.Select(ri => ri.Ingredient != null ? ri.Ingredient.Name : "Unknown").ToList()
+                    ? r.RecipeIngredients.Select(ri => ri.Ingredient != null ? $"{ri.Ingredient.Name} ({ri.Amount})" : "Unknown").ToList()
                     : new List<string>()
             });
         }
@@ -61,19 +61,33 @@ namespace FinalProject.BL.Services
                 Title = dto.Title,
                 Instructions = dto.Instructions,
                 PrepTimeMinutes = dto.PrepTimeMinutes,
-                UserId = dto.UserId
+                UserId = dto.UserId,
+                RecipeIngredients = new List<RecipeIngredient>()
             };
+
+            if (dto.Ingredients != null)
+            {
+                foreach (var ingredient in dto.Ingredients)
+                {
+                    recipe.RecipeIngredients.Add(new RecipeIngredient
+                    {
+                        IngredientId = ingredient.IngredientId,
+                        Amount = ingredient.Amount 
+                    });
+                }
+            }
 
             await _recipeRepository.AddAsync(recipe);
             await _recipeRepository.SaveChangesAsync();
-
+            
             return new RecipeDto
             {
                 Id = recipe.Id,
                 Title = recipe.Title,
                 Instructions = recipe.Instructions,
                 PrepTimeMinutes = recipe.PrepTimeMinutes,
-                UserId = recipe.UserId
+                UserId = recipe.UserId,
+                Ingredients = new List<string>()
             };
         }
         public async Task<bool> UpdateRecipeAsync(int id, RecipeCreateDto dto)

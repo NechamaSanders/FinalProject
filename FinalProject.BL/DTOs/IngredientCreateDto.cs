@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace FinalProject.BL.DTOs
 {
-    public class UserCreateDto
+    public class IngredientCreateDto
     {
         public string Name { get; set; }
-        public string Specialty { get; set; } 
     }
 }
