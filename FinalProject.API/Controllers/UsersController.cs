@@ -28,5 +28,23 @@ namespace FinalProject.API.Controllers
             await _userService.CreateUserAsync(userCreateDto);
             return StatusCode(201); 
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, UserCreateDto userDto)
+        {
+            var success = await _userService.UpdateUserAsync(id, userDto);
+            if (!success) return NotFound(new { message = "User not found" });
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var success = await _userService.DeleteUserAsync(id);
+            if (!success) return NotFound(new { message = "User not found" });
+
+            return NoContent();
+        }
     }
 }

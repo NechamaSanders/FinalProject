@@ -35,5 +35,23 @@ namespace FinalProject.API.Controllers
             RecipeDto createdRecipe = await _recipeService.CreateRecipeAsync(recipeDto);
             return CreatedAtAction(nameof(GetById), new { id = createdRecipe.Id }, recipeDto);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, RecipeCreateDto recipeDto)
+        {
+            var success = await _recipeService.UpdateRecipeAsync(id, recipeDto);
+            if (!success) return NotFound(new { message = "Recipe not found" });
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var success = await _recipeService.DeleteRecipeAsync(id);
+            if (!success) return NotFound(new { message = "Recipe not found" });
+
+            return NoContent();
+        }
     }
 }
