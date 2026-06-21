@@ -25,7 +25,7 @@ namespace FinalProject.API.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(IngredientCreateDto ingredientDto)
         {
-            await _ingredientService.CreateIngredientAsync(ingredientDto.Name);
+            await _ingredientService.CreateIngredientAsync(ingredientDto);
             return StatusCode(201); 
         }
     }
