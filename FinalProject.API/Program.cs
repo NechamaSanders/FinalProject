@@ -1,3 +1,4 @@
+using FinalProject.BL;
 using FinalProject.BL.Services;
 using FinalProject.DAL;
 using FinalProject.DAL.Repositories;
@@ -19,6 +20,7 @@ builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IIngredientService, IngredientService>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>

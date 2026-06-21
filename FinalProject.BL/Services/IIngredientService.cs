@@ -10,6 +10,6 @@ namespace FinalProject.BL.Services
     public interface IIngredientService
     {
         Task<IEnumerable<IngredientDto>> GetAllIngredientsAsync();
-        Task<IngredientDto> CreateIngredientAsync(string name);
+        Task<IngredientDto> CreateIngredientAsync(IngredientCreateDto ingredientDto);
     }
 }
