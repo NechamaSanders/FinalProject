@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL.Entities
 {
-    internal class User
+    public class User
     {
+        public int Id { get; set; } 
+        public string Name { get; set; }
+        public string Specialty { get; set; } 
+        public List<Recipe> Recipes { get; set; } = new List<Recipe>();
     }
 }

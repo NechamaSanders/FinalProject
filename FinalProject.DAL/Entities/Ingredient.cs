@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL.Entities
 {
-    internal class Ingredient
+    public class Ingredient
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public List<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
     }
 }
