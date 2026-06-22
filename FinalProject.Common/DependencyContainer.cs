@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using FinalProject.BL.Services;
-using FinalProject.BL; 
-using FinalProject.DAL;    
+using FinalProject.BL;
+using FinalProject.DAL;
 using FinalProject.DAL.Repositories;
 namespace FinalProject.Common
 {
@@ -13,7 +13,7 @@ namespace FinalProject.Common
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
-      
+
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IIngredientRepository, IngredientRepository>();

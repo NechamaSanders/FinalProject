@@ -9,7 +9,7 @@ namespace FinalProject.BL
         public MappingProfile()
         {
             CreateMap<RecipeCreateDto, Recipe>()
-                .ForMember(dest => dest.RecipeIngredients, opt => opt.Ignore()); 
+                .ForMember(dest => dest.RecipeIngredients, opt => opt.Ignore());
 
             CreateMap<Recipe, RecipeDto>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User != null ? src.User.Name : "Unknown"))
@@ -17,7 +17,7 @@ namespace FinalProject.BL
                     src.RecipeIngredients != null
                         ? src.RecipeIngredients.Select(ri => ri.Ingredient != null ? $"{ri.Ingredient.Name} ({ri.Amount})" : "Unknown").ToList()
                         : new List<string>()));
-            
+
             CreateMap<User, UserDto>();
 
             CreateMap<UserCreateDto, User>();

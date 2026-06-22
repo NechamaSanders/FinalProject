@@ -9,6 +9,6 @@ namespace FinalProject.BL.DTOs
     public class IngredientCreationInfo
     {
         public int IngredientId { get; set; }
-        public string Amount { get; set; } 
+        public string Amount { get; set; }
     }
 }

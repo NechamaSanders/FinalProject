@@ -9,6 +9,6 @@ namespace FinalProject.BL.DTOs
     public class UserCreateDto
     {
         public string Name { get; set; }
-        public string Specialty { get; set; } 
+        public string Specialty { get; set; }
     }
 }

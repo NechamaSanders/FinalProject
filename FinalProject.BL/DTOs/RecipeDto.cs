@@ -10,8 +10,8 @@ namespace FinalProject.BL.DTOs
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Instructions { get; set; } 
-        public int PrepTimeMinutes { get; set; } 
+        public string Instructions { get; set; }
+        public int PrepTimeMinutes { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
         public List<string> Ingredients { get; set; } = new List<string>();

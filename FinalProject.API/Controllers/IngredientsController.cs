@@ -26,7 +26,7 @@ namespace FinalProject.API.Controllers
         public async Task<ActionResult> Create(IngredientCreateDto ingredientDto)
         {
             await _ingredientService.CreateIngredientAsync(ingredientDto);
-            return StatusCode(201); 
+            return StatusCode(201);
         }
     }
 }

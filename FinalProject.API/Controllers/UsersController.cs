@@ -22,11 +22,19 @@ namespace FinalProject.API.Controllers
             return Ok(chefs);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDto>> GetById(int id)
+        {
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null) return NotFound();
+            return Ok(user);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Create(UserCreateDto userCreateDto)
         {
             await _userService.CreateUserAsync(userCreateDto);
-            return StatusCode(201); 
+            return StatusCode(201);
         }
 
         [HttpPut("{id}")]
