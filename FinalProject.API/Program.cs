@@ -1,7 +1,3 @@
-using FinalProject.BL;
-using FinalProject.BL.Services;
-using FinalProject.DAL;
-using FinalProject.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System;
@@ -53,11 +49,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<FinalProject.DAL.AppDbContext>();
-    context.Database.EnsureCreated();
-}
+DependencyContainer.InitializeDatabase(app.Services);
 
 app.Run();

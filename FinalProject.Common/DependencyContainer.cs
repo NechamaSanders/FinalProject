@@ -26,5 +26,14 @@ namespace FinalProject.Common
 
             return services;
         }
+
+        public static void InitializeDatabase(IServiceProvider serviceProvider)
+        {
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<FinalProject.DAL.AppDbContext>();
+                context.Database.EnsureCreated();
+            }
+        }
     }
 }
