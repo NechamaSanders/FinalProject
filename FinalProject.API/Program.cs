@@ -3,7 +3,18 @@ using FinalProject.BL.Services;
 using FinalProject.DAL;
 using FinalProject.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System;
 
+string currentDir = AppContext.BaseDirectory;
+while (currentDir != null && Directory.GetFiles(currentDir, "*.sln").Length == 0)
+{
+    currentDir = Directory.GetParent(currentDir)?.FullName;
+}
+if (currentDir != null)
+{
+    AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(currentDir, "DB"));
+}
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -44,5 +55,12 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<FinalProject.DAL.AppDbContext>();
+    context.Database.EnsureCreated();
+}
 
 app.Run();
