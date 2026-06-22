@@ -5,6 +5,7 @@ using FinalProject.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System;
+using FinalProject.Common;
 
 string currentDir = AppContext.BaseDirectory;
 while (currentDir != null && Directory.GetFiles(currentDir, "*.sln").Length == 0)
@@ -23,15 +24,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
-builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IRecipeService, RecipeService>();
-builder.Services.AddScoped<IIngredientService, IngredientService>();
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+builder.Services.RegisterSystemServices(connectionString);
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
